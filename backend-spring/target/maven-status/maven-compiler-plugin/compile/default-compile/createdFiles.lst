@@ -1,0 +1,12 @@
+com\algotech\api\controller\GlobalExceptionHandler.class
+com\algotech\api\dto\ContactRequest.class
+com\algotech\api\service\EmailService.class
+com\algotech\api\config\CorsConfig.class
+com\algotech\api\repository\InquiryRepository.class
+com\algotech\api\entity\Inquiry.class
+com\algotech\api\service\ContactService.class
+com\algotech\api\dto\ContactResponse.class
+com\algotech\api\controller\HealthController.class
+com\algotech\api\controller\ContactController.class
+com\algotech\api\dto\HealthResponse.class
+com\algotech\api\AlgotechApiApplication.class

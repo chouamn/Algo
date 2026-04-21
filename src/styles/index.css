@@ -1,0 +1,106 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Anchor scroll offset — clears the fixed pill navbar (h-14 + pt-4 = ~72px)
+   so #section navigation aligns the section top below the navbar instead of behind it.
+   !important guards against Tailwind v4 preflight or component utilities resetting it. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px !important;
+}
+
+body {
+  scroll-padding-top: 96px !important;
+}
+
+section[id],
+div[id],
+[id] {
+  scroll-margin-top: 96px !important;
+}
+
+/* Explicit override for the Software Services section — matches navbar height
+   + buffer so CTA stays above the fold on anchor navigation. */
+#licensing {
+  scroll-margin-top: 100px !important;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   Section 508 / WCAG 2.1 AA — global accessibility rules
+   ──────────────────────────────────────────────────────────────────── */
+
+/* Visible keyboard-focus indicator on every interactive element.
+   Uses :focus-visible so mouse users don't see a ring, but keyboard/AT
+   users always do. 2px ring with 2px offset = 3:1+ contrast against
+   any background per WCAG 2.4.11. */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* Honor user's motion preference — disable non-essential animations
+   when prefers-reduced-motion: reduce. Keeps UI functional, removes
+   vestibular-trigger motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Screen-reader-only utility (used by skip link). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.sr-only.focus\:not-sr-only:focus,
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Marquee animation for TrustedBy strip */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Blur-in scroll reveal helper */
+@keyframes blurFadeUp {
+  from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+}
