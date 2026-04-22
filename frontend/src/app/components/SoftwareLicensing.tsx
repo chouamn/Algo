@@ -74,7 +74,7 @@ export function SoftwareLicensing() {
             vendors—ensuring compliance, cost control, and operational efficiency at
             scale.
           </p>
-          <p className="mt-2 text-xs sm:text-sm text-[var(--navy)]/60 leading-relaxed whitespace-nowrap">
+          <p className="mt-2 text-xs sm:text-sm text-[var(--navy)]/60 leading-relaxed lg:whitespace-nowrap">
             Access to leading enterprise software solutions through our partnership with Carahsoft Technology Corp.
           </p>
         </motion.header>
