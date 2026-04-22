@@ -11,6 +11,7 @@ import com.sendgrid.helpers.mail.objects.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -34,8 +35,10 @@ public class EmailService {
         this.adminEmail = adminEmail;
     }
 
-    // Never throws — email delivery failures are logged but must not
-    // convert a successful DB insert into a 5xx for the client.
+    // Async: runs on the task-executor thread pool so the HTTP response
+    // is returned immediately after the DB commit, not after the
+    // SendGrid round-trip. Failures are logged but never propagate.
+    @Async
     public void sendInquiryNotification(Inquiry inquiry) {
         try {
             Mail mail = new Mail(
@@ -72,6 +75,7 @@ public class EmailService {
             Received:  %s
             Name:      %s
             Email:     %s
+            Phone:     %s
 
             Message:
             %s
@@ -80,6 +84,7 @@ public class EmailService {
                 i.getCreatedAt(),
                 i.getName(),
                 i.getEmail(),
+                i.getPhone() != null ? i.getPhone() : "(not provided)",
                 i.getMessage()
             );
     }

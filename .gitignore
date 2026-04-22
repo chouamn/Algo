@@ -1,29 +1,33 @@
-# Dependencies
+# ===== Dependencies =====
 node_modules
 .pnp
 .pnp.js
 
-# Build output
-dist
-dist-ssr
-build
-.vercel
+# ===== Build output =====
+# Frontend
+frontend/dist
+frontend/dist-ssr
+frontend/build
 
-# Environment — NEVER commit
+# Backend
+backend-spring/target
+backend-spring/out
+
+# ===== Environment — NEVER commit =====
 .env
 .env.local
 .env.*.local
+backend-spring/.env
 
-# Logs
+# ===== Logs =====
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 logs
-*.log
 
-# Editor / OS
+# ===== IDE / OS =====
 .DS_Store
 Thumbs.db
 .idea
@@ -31,9 +35,14 @@ Thumbs.db
 !.vscode/extensions.json
 *.swp
 *.swo
+*.iml
+.classpath
+.project
+.settings
 
-# Testing
+# ===== Testing =====
 coverage
+backend-spring/.coverage
 
-# Misc
-*.local
+# ===== Tooling state (local only) =====
+.claude

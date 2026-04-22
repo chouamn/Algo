@@ -15,6 +15,9 @@ public record ContactRequest(
     @Size(max = 255)
     String email,
 
+    @Size(max = 40, message = "Phone must be 40 characters or fewer")
+    String phone,
+
     @NotBlank(message = "Message is required")
     @Size(max = 5000, message = "Message must be 5000 characters or fewer")
     String message

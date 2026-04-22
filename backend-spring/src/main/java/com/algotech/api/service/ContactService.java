@@ -22,11 +22,15 @@ public class ContactService {
         Inquiry inquiry = new Inquiry();
         inquiry.setName(request.name().trim());
         inquiry.setEmail(request.email().trim().toLowerCase());
+        inquiry.setPhone(request.phone() != null && !request.phone().isBlank()
+            ? request.phone().trim() : null);
         inquiry.setMessage(request.message().trim());
 
-        Inquiry saved = repository.save(inquiry);
+        // saveAndFlush forces Hibernate to insert immediately so @CreationTimestamp
+        // fires before the async email task enqueues — otherwise `createdAt` is null
+        // when the email body is built on the worker thread.
+        Inquiry saved = repository.saveAndFlush(inquiry);
 
-        // EmailService self-catches — a SendGrid failure must not roll back the insert.
         emailService.sendInquiryNotification(saved);
 
         return saved;
