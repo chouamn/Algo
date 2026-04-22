@@ -39,9 +39,9 @@ export function Hero() {
               variants={fadeUp}
               className="text-3xl sm:text-4xl lg:text-[2.25rem] xl:text-[2.5rem] font-bold text-[var(--navy)] tracking-tight leading-[1.15] mb-6"
             >
-              <span className="block whitespace-nowrap">End-to-End Software Solutions,</span>
-              <span className="block whitespace-nowrap">Built for Performance</span>
-              <span className="block whitespace-nowrap">and Compliance</span>
+              <span className="block lg:whitespace-nowrap">End-to-End Software Solutions,</span>
+              <span className="block lg:whitespace-nowrap">Built for Performance</span>
+              <span className="block lg:whitespace-nowrap">and Compliance</span>
             </motion.h1>
 
             <motion.p
